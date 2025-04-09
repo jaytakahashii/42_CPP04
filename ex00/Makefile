@@ -1,21 +1,35 @@
 MAKEFILE 		= Makefile
 
-NAME				= Sample
+NAME				= Polymorphism
 
 SRC_DIR			= src/
 OBJ_DIR			= .obj/
 
 INCLUDE_DIR	= include/
-INCLUDE			= -I$(INCLUDE_DIR)
-HEADERS			= $(shell find $(INCLUDE_DIR) -name "*.hpp")
+INCLUDE			= -I $(INCLUDE_DIR)
+HEADERS			= Animal.hpp \
+							Dog.hpp \
+							Cat.hpp \
+							WrongAnimal.hpp \
+							WrongCat.hpp
+HEADER			= $(addprefix $(INCLUDE_DIR), $(HEADERS))
+
+DEPS				= $(HEADER) $(MAKEFILE)
 
 CXX					= c++
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 
 RM					= rm -rf
 
-SRC_FILES		= $(shell find $(SRC_DIR) -name "*.cpp" | sed "s/.*\///")
+SRC_DIR			= src/
+SRC_FILES		=	main.cpp \
+							Animal.cpp \
+							Dog.cpp \
+							Cat.cpp \
+							WrongAnimal.cpp \
+							WrongCat.cpp
 
+SRCS				= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS				= $(addprefix $(OBJ_DIR), $(SRC_FILES:.cpp=.o))
 
 # color ************
@@ -31,28 +45,24 @@ CUT	= "\033[K"
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJS) $(DEPS)
-	@echo $(Y) "$(NAME) src files successfully compiled\n" $(X)
-	@echo $(B) "$(NAME) creating" $(X)
-	@printf $(UP)$(CUT)
-	@$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
+	@echo $(Y) "src files successfully compiled.\n" $(X)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 	@echo $(G) "!! $(NAME) created !!\n" $(X)
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.cpp | $(OBJ_DIR)
-	@echo $(Y) "Compiling $<" $(X)
-	@$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
-	@printf $(UP)$(CUT)
+	$(CXX) $(CXXFLAGS) $(INCLUDE) -c $< -o $@
 
 clean:
-	@$(RM) $(OBJ_DIR)
-	@echo $(R) "$(OBJ_DIR) has been removed!!" $(X)
+	$(RM) $(OBJ_DIR)
+	@echo $(R) "$(OBJ_DIR) has been removed.\n" $(X)
 
 fclean:
-	@$(RM) $(OBJ_DIR)
-	@$(RM) $(NAME)
-	@echo $(R) "$(NAME) $(OBJ_DIR) has been removed!!" $(X)
+	$(RM) $(OBJ_DIR)
+	$(RM) $(NAME)
+	@echo $(R) "$(NAME) and $(OBJ_DIR) has been removed.\n" $(X)
 
 re: fclean all
 
