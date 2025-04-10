@@ -11,8 +11,7 @@ HEADERS			= Animal.hpp \
 							Dog.hpp \
 							Cat.hpp \
 							WrongAnimal.hpp \
-							WrongCat.hpp \
-							Brain.hpp
+							WrongCat.hpp
 HEADER			= $(addprefix $(INCLUDE_DIR), $(HEADERS))
 
 DEPS				= $(HEADER) $(MAKEFILE)
