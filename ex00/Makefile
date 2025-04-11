@@ -11,7 +11,8 @@ HEADERS			= Animal.hpp \
 							Dog.hpp \
 							Cat.hpp \
 							WrongAnimal.hpp \
-							WrongCat.hpp
+							WrongCat.hpp \
+							color.hpp
 HEADER			= $(addprefix $(INCLUDE_DIR), $(HEADERS))
 
 DEPS				= $(HEADER) $(MAKEFILE)
@@ -19,6 +20,7 @@ DEPS				= $(HEADER) $(MAKEFILE)
 CXX					= c++
 CXXFLAGS		= -Wall -Wextra -Werror -std=c++98
 PEDANT			= -pedantic
+SANITIZE		= -fsanitize=address -g3
 
 RM					= rm -rf
 
@@ -71,4 +73,8 @@ pedant: CXXFLAGS += $(PEDANT)
 pedant: re
 	@echo $(G) "pedantic mode activated.\n" $(X)
 
-.PHONY: all clean fclean re
+leaks: CXXFLAGS += $(SANITIZE)
+leaks: re
+	@echo $(G) "leaks mode activated.\n" $(X)
+
+.PHONY: all clean fclean re pedant leaks
