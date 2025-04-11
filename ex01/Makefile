@@ -12,6 +12,7 @@ HEADERS			= Animal.hpp \
 							Cat.hpp \
 							WrongAnimal.hpp \
 							WrongCat.hpp \
+							Brain.hpp \
 							color.hpp
 HEADER			= $(addprefix $(INCLUDE_DIR), $(HEADERS))
 
@@ -30,7 +31,8 @@ SRC_FILES		=	main.cpp \
 							Dog.cpp \
 							Cat.cpp \
 							WrongAnimal.cpp \
-							WrongCat.cpp
+							WrongCat.cpp \
+							Brain.cpp
 
 SRCS				= $(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJS				= $(addprefix $(OBJ_DIR), $(SRC_FILES:.cpp=.o))

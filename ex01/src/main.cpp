@@ -1,45 +1,37 @@
-#include <iostream>
-
-#include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
 
 int main() {
-  std::cout << BLUE
-      "initializing Animal, Cat, Dog, WrongAnimal, and WrongCat" RESET
-            << std::endl;
-  const Animal* meta = new Animal();
-  const Animal* j = new Dog();
-  const Animal* i = new Cat();
+  const int SIZE = 4;
+  Animal* animals[SIZE];
 
-  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
+  // Half Dogs, Half Cats
+  for (int i = 0; i < SIZE / 2; ++i) {
+    animals[i] = new Dog();
+  }
+  for (int i = SIZE / 2; i < SIZE; ++i) {
+    animals[i] = new Cat();
+  }
 
-  std::cout << j->getType() << " " << std::endl;
-  std::cout << i->getType() << " " << std::endl;
-  i->makeSound();
-  j->makeSound();
-  meta->makeSound();
+  std::cout << "\n--- Sounds ---" << std::endl;
+  for (int i = 0; i < SIZE; ++i) {
+    animals[i]->makeSound();
+  }
 
-  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
-  delete i;
-  delete j;
-  delete meta;
+  std::cout << "\n--- Cleanup ---" << std::endl;
+  for (int i = 0; i < SIZE; ++i) {
+    delete animals[i];
+  }
 
-  std::cout << BLUE "\nInitializing WrongAnimal and WrongCat" RESET
-            << std::endl;
-  const WrongAnimal* wrongMeta = new WrongAnimal();
-  const WrongAnimal* wrongCat = new WrongCat();
+  std::cout << "\n--- Deep Copy Test ---" << std::endl;
+  Dog original;
+  original.setIdea(0, "Chase the ball");
 
-  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
-  std::cout << wrongCat->getType() << " " << std::endl;
-  wrongCat->makeSound();
-  wrongMeta->makeSound();
+  Dog copy = original;
+  copy.setIdea(0, "Sleep all day");
 
-  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
-  delete wrongMeta;
-  delete wrongCat;
+  std::cout << "Original Dog idea: " << original.getIdea(0) << std::endl;
+  std::cout << "Copied Dog idea:   " << copy.getIdea(0) << std::endl;
 
   return 0;
 }
