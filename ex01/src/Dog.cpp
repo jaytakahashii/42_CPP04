@@ -2,16 +2,16 @@
 
 Dog::Dog() : Animal(), _brain(new Brain()) {
   _type = "Dog";
-  std::cout << "Dog constructed" << std::endl;
+  std::cout << "🐶🛠️  Dog constructed" << std::endl;
 }
 
 Dog::Dog(const Dog& other) : Animal(other) {
   _brain = new Brain(*other._brain);
-  std::cout << "Dog copy constructed" << std::endl;
+  std::cout << "🐶📋 Dog copy constructed" << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& other) {
-  std::cout << "Dog copy assigned" << std::endl;
+  std::cout << "🐶🔁 Dog copy assigned" << std::endl;
   if (this != &other) {
     Animal::operator=(other);
     delete _brain;                      // Free the old brain
@@ -22,11 +22,11 @@ Dog& Dog::operator=(const Dog& other) {
 
 Dog::~Dog() {
   delete _brain;
-  std::cout << "Dog destructed" << std::endl;
+  std::cout << "🐶💥 Dog destructed" << std::endl;
 }
 
 void Dog::makeSound() const {
-  std::cout << "Woof! 🐶" << std::endl;
+  std::cout << YELLOW "🐶 Woof!" RESET << std::endl;
 }
 
 void Dog::setIdea(int index, const std::string& idea) {

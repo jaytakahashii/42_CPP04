@@ -1,15 +1,15 @@
 #include "Animal.hpp"
 
 Animal::Animal() : _type("Animal") {
-  std::cout << "Animal constructed" << std::endl;
+  std::cout << "🐾🛠️  Animal constructed" << std::endl;
 }
 
 Animal::Animal(const Animal& other) : _type(other._type) {
-  std::cout << "Animal copy constructed" << std::endl;
+  std::cout << "🐾📋 Animal copy constructed" << std::endl;
 }
 
 Animal& Animal::operator=(const Animal& other) {
-  std::cout << "Animal copy assigned" << std::endl;
+  std::cout << "🐾🔁 Animal copy assigned" << std::endl;
   if (this != &other) {
     _type = other._type;
   }
@@ -17,7 +17,7 @@ Animal& Animal::operator=(const Animal& other) {
 }
 
 Animal::~Animal() {
-  std::cout << "Animal destructed" << std::endl;
+  std::cout << "🐾💥 Animal destructed" << std::endl;
 }
 
 std::string Animal::getType() const {
@@ -25,5 +25,5 @@ std::string Animal::getType() const {
 }
 
 void Animal::makeSound() const {
-  std::cout << "*Generic animal sound*" << std::endl;
+  std::cout << YELLOW "🐾 *Generic animal sound*" RESET << std::endl;
 }

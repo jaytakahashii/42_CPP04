@@ -2,16 +2,16 @@
 
 Cat::Cat() : Animal(), _brain(new Brain()) {
   _type = "Cat";
-  std::cout << "Cat constructed" << std::endl;
+  std::cout << "🐱🛠️  Cat constructed" << std::endl;
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {
   _brain = new Brain(*other._brain);
-  std::cout << "Cat copy constructed" << std::endl;
+  std::cout << "🐱📋 Cat copy constructed" << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other) {
-  std::cout << "Cat copy assigned" << std::endl;
+  std::cout << "🐱🔁 Cat copy assigned" << std::endl;
   if (this != &other) {
     Animal::operator=(other);
     delete _brain;
@@ -22,11 +22,11 @@ Cat& Cat::operator=(const Cat& other) {
 
 Cat::~Cat() {
   delete _brain;
-  std::cout << "Cat destructed" << std::endl;
+  std::cout << "🐱💥 Cat destructed" << std::endl;
 }
 
 void Cat::makeSound() const {
-  std::cout << "Meow! 🐱" << std::endl;
+  std::cout << YELLOW "🐱 Meow!" RESET << std::endl;
 }
 
 void Cat::setIdea(int index, const std::string& idea) {
