@@ -5,25 +5,41 @@
 #include "Dog.hpp"
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
-#include "color.hpp"
 
 int main() {
-  std::cout << BLUE "=== Correct Animal Test ===" RESET << std::endl;
-  const Animal* a1 = new Dog();
-  const Animal* a2 = new Cat();
+  std::cout << BLUE
+      "initializing Animal, Cat, Dog, WrongAnimal, and WrongCat" RESET
+            << std::endl;
+  const Animal* meta = new Animal();
+  const Animal* j = new Dog();
+  const Animal* i = new Cat();
 
-  a1->makeSound();  // Woof!
-  a2->makeSound();  // Meow!
+  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
 
-  delete a1;
-  delete a2;
+  std::cout << j->getType() << " " << std::endl;
+  std::cout << i->getType() << " " << std::endl;
+  i->makeSound();
+  j->makeSound();
+  meta->makeSound();
 
-  std::cout << BLUE "\n=== Wrong Animal Test ===" RESET << std::endl;
-  const WrongAnimal* wa = new WrongCat();
+  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
+  delete i;
+  delete j;
+  delete meta;
 
-  wa->makeSound();  // ❌ WrongAnimalのmakeSound()が呼ばれる
+  std::cout << BLUE "\nInitializing WrongAnimal and WrongCat" RESET
+            << std::endl;
+  const WrongAnimal* wrongMeta = new WrongAnimal();
+  const WrongAnimal* wrongCat = new WrongCat();
 
-  delete wa;
+  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
+  std::cout << wrongCat->getType() << " " << std::endl;
+  wrongCat->makeSound();
+  wrongMeta->makeSound();
+
+  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
+  delete wrongMeta;
+  delete wrongCat;
 
   return 0;
 }

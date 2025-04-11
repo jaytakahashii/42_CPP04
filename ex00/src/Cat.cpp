@@ -1,7 +1,5 @@
 #include "Cat.hpp"
 
-#include <iostream>
-
 Cat::Cat() {
   _type = "Cat";
   std::cout << "Cat constructor called" << std::endl;

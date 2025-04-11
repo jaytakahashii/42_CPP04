@@ -9,5 +9,5 @@ class WrongCat : public WrongAnimal {
   WrongCat& operator=(const WrongCat& other);
   ~WrongCat();
 
-  void makeSound() const;  // オーバーライドだが、実際は呼ばれない
+  void makeSound() const;
 };

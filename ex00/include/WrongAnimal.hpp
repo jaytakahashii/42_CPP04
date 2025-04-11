@@ -1,6 +1,9 @@
 #pragma once
 
+#include <iostream>
 #include <string>
+
+#include "color.hpp"
 
 class WrongAnimal {
  protected:
@@ -12,6 +15,6 @@ class WrongAnimal {
   WrongAnimal& operator=(const WrongAnimal& other);
   ~WrongAnimal();
 
-  void makeSound() const;
   std::string getType() const;
+  void makeSound() const;
 };
