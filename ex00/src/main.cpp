@@ -6,15 +6,16 @@
 #include "WrongAnimal.hpp"
 #include "WrongCat.hpp"
 
+static void printDivider(std::string title) {
+  std::cout << std::endl;
+  std::cout << BOLDWHITE << "==== " << title << " ====" << RESET << std::endl;
+}
+
 int main() {
-  std::cout << BLUE
-      "initializing Animal, Cat, Dog, WrongAnimal, and WrongCat" RESET
-            << std::endl;
+  printDivider("Animal test");
   const Animal* meta = new Animal();
   const Animal* j = new Dog();
   const Animal* i = new Cat();
-
-  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
 
   std::cout << j->getType() << " " << std::endl;
   std::cout << i->getType() << " " << std::endl;
@@ -22,22 +23,18 @@ int main() {
   j->makeSound();
   meta->makeSound();
 
-  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
   delete i;
   delete j;
   delete meta;
 
-  std::cout << BLUE "\nInitializing WrongAnimal and WrongCat" RESET
-            << std::endl;
+  printDivider("WrongAnimal test");
   const WrongAnimal* wrongMeta = new WrongAnimal();
   const WrongAnimal* wrongCat = new WrongCat();
 
-  std::cout << BLUE "\nGetting types and making sounds" RESET << std::endl;
   std::cout << wrongCat->getType() << " " << std::endl;
   wrongCat->makeSound();
   wrongMeta->makeSound();
 
-  std::cout << BLUE "\nDeleting objects" RESET << std::endl;
   delete wrongMeta;
   delete wrongCat;
 

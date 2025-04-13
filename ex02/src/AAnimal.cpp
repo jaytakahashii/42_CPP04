@@ -1,15 +1,15 @@
 #include "AAnimal.hpp"
 
 AAnimal::AAnimal() : _type("AAnimal") {
-  std::cout << "🐾🛠️  AAnimal constructed" << std::endl;
+  std::cout << GREEN "🐾🛠️  Animal constructed" RESET << std::endl;
 }
 
 AAnimal::AAnimal(const AAnimal& other) : _type(other._type) {
-  std::cout << "🐾📋 AAnimal copy constructed" << std::endl;
+  std::cout << GREEN "🐾📋 Animal copy constructed" RESET << std::endl;
 }
 
 AAnimal& AAnimal::operator=(const AAnimal& other) {
-  std::cout << "🐾🔁 AAnimal copy assigned" << std::endl;
+  std::cout << GREEN "🐾🔁 Animal copy assigned" RESET << std::endl;
   if (this != &other) {
     _type = other._type;
   }
@@ -17,7 +17,7 @@ AAnimal& AAnimal::operator=(const AAnimal& other) {
 }
 
 AAnimal::~AAnimal() {
-  std::cout << "🐾💥 AAnimal destructed" << std::endl;
+  std::cout << GREEN "🐾💥 Animal destructed" RESET << std::endl;
 }
 
 std::string AAnimal::getType() const {

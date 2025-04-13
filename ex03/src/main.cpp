@@ -6,7 +6,7 @@
 #include "MateriaSource.hpp"
 #include "color.hpp"
 
-void printDivider(std::string title) {
+static void printDivider(std::string title) {
   std::cout << std::endl;
   std::cout << BOLDWHITE << "==== " << title << " ====" << RESET << std::endl;
 }
@@ -48,18 +48,6 @@ int main() {
     assigned.use(1, original);
   }
 
-  printDivider("Edge Case: Exceeding Materia Slots");
-
-  MateriaSource* msrc = new MateriaSource();
-  msrc->learnMateria(new Ice());
-  msrc->learnMateria(new Cure());
-  msrc->learnMateria(new Ice());
-  msrc->learnMateria(new Cure());
-  // Exceed capacity
-  msrc->learnMateria(new Ice());
-
-  delete msrc;
-
   printDivider("Edge Case: Unknown Materia Type");
 
   MateriaSource* src2 = new MateriaSource();
@@ -84,8 +72,6 @@ int main() {
   invalid.use(10, invalid);  // Out of bounds
   invalid.unequip(-1);       // Negative index
   invalid.use(-2, invalid);  // Negative index
-
-  printDivider("Memory Leak Check Complete");
 
   return 0;
 }

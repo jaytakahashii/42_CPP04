@@ -2,15 +2,15 @@
 
 Dog::Dog() : Animal() {
   _type = "Dog";
-  std::cout << "🐶🛠️  Dog constructed" << std::endl;
+  std::cout << CYAN "🐶🛠️  Dog constructed" RESET << std::endl;
 }
 
 Dog::Dog(const Dog& other) : Animal(other) {
-  std::cout << "🐶📋 Dog copy constructed" << std::endl;
+  std::cout << CYAN "🐶📋 Dog copy constructed" RESET << std::endl;
 }
 
 Dog& Dog::operator=(const Dog& other) {
-  std::cout << "🐶🔁 Dog copy assigned" << std::endl;
+  std::cout << CYAN "🐶🔁 Dog copy assigned" RESET << std::endl;
   if (this != &other) {
     Animal::operator=(other);
   }
@@ -18,9 +18,9 @@ Dog& Dog::operator=(const Dog& other) {
 }
 
 Dog::~Dog() {
-  std::cout << "🐶💥 Dog destructed" << std::endl;
+  std::cout << CYAN "🐶💥 Dog destructed" RESET << std::endl;
 }
 
 void Dog::makeSound() const {
-  std::cout << YELLOW "🐶 Woof!" RESET << std::endl;
+  std::cout << CYAN "🐶 Woof!" RESET << std::endl;
 }
