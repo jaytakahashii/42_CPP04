@@ -1,12 +1,17 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
+static void printDivider(std::string title) {
+  std::cout << std::endl;
+  std::cout << BOLDWHITE << "==== " << title << " ====" << RESET << std::endl;
+}
+
 int main() {
   const int SIZE = 4;
   Animal* animals[SIZE];
 
   // Half Dogs, Half Cats
-  std::cout << BLUE "\n--- Animal Creation ---" RESET << std::endl;
+  printDivider("instantiation");
   for (int i = 0; i < SIZE / 2; ++i) {
     animals[i] = new Dog();
   }
@@ -14,17 +19,17 @@ int main() {
     animals[i] = new Cat();
   }
 
-  std::cout << BLUE "\n--- Sounds ---" RESET << std::endl;
+  printDivider("types");
   for (int i = 0; i < SIZE; ++i) {
     animals[i]->makeSound();
   }
 
-  std::cout << BLUE "\n--- Cleanup ---" RESET << std::endl;
+  printDivider("destruction");
   for (int i = 0; i < SIZE; ++i) {
     delete animals[i];
   }
 
-  std::cout << BLUE "\n--- Deep Copy Test ---" RESET << std::endl;
+  printDivider("deep copy test");
   Dog original;
   original.setIdea(0, "Chase the ball");
 
@@ -35,8 +40,6 @@ int main() {
             << std::endl;
   std::cout << YELLOW "Copied Dog idea:   " << copy.getIdea(0) << RESET
             << std::endl;
-
-  std::cout << BLUE "\n--- end of main ---" RESET << std::endl;
 
   return 0;
 }
