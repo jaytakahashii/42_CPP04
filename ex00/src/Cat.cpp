@@ -2,15 +2,15 @@
 
 Cat::Cat() : Animal() {
   _type = "Cat";
-  std::cout << "🐱🛠️  Cat constructed" << std::endl;
+  std::cout << WHITE "🐱🛠️  Cat constructed" RESET << std::endl;
 }
 
 Cat::Cat(const Cat& other) : Animal(other) {
-  std::cout << "🐱📋 Cat copy constructed" << std::endl;
+  std::cout << WHITE "🐱📋 Cat copy constructed" RESET << std::endl;
 }
 
 Cat& Cat::operator=(const Cat& other) {
-  std::cout << "🐱🔁 Cat copy assigned" << std::endl;
+  std::cout << WHITE "🐱🔁 Cat copy assigned" RESET << std::endl;
   if (this != &other) {
     Animal::operator=(other);
   }
@@ -18,9 +18,9 @@ Cat& Cat::operator=(const Cat& other) {
 }
 
 Cat::~Cat() {
-  std::cout << "🐱💥 Cat destructed" << std::endl;
+  std::cout << WHITE "🐱💥 Cat destructed" RESET << std::endl;
 }
 
 void Cat::makeSound() const {
-  std::cout << YELLOW "🐱 Meow!" RESET << std::endl;
+  std::cout << WHITE "🐱 Meow!" RESET << std::endl;
 }
