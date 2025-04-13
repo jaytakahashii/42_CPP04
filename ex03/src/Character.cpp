@@ -4,47 +4,60 @@
 
 #include "color.hpp"
 
-Character::Character(std::string const& name) : _name(name) {
+Character::Character() : _name("default"), _floorCount(0) {
   for (int i = 0; i < 4; ++i)
     _inventory[i] = NULL;
+  for (int i = 0; i < 100; ++i)
+    _floor[i] = NULL;
+  std::cout << GREEN << "Character default constructed" << RESET << std::endl;
+}
+
+Character::Character(std::string const& name) : _name(name), _floorCount(0) {
+  for (int i = 0; i < 4; ++i)
+    _inventory[i] = NULL;
+  for (int i = 0; i < 100; ++i)
+    _floor[i] = NULL;
   std::cout << GREEN << "Character constructed" << RESET << std::endl;
 }
 
-Character::Character(Character const& other) {
+Character::Character(Character const& other)
+    : _name(other._name), _floorCount(other._floorCount) {
+  for (int i = 0; i < 4; ++i)
+    _inventory[i] = other._inventory[i] ? other._inventory[i]->clone() : NULL;
+  for (int i = 0; i < 100; ++i)
+    _floor[i] = other._floor[i] ? other._floor[i]->clone() : NULL;
   std::cout << GREEN << "Character copy constructed" << RESET << std::endl;
-  *this = other;
 }
 
 Character& Character::operator=(Character const& other) {
   std::cout << GREEN << "Character copy assigned" << RESET << std::endl;
   if (this != &other) {
     _name = other._name;
-    _clearInventory();
-    _copyInventory(other);
+    for (int i = 0; i < 4; ++i) {
+      if (_inventory[i])
+        delete _inventory[i];
+      _inventory[i] = other._inventory[i] ? other._inventory[i]->clone() : NULL;
+    }
+    for (int i = 0; i < 100; ++i) {
+      if (_floor[i])
+        delete _floor[i];
+      _floor[i] = other._floor[i] ? other._floor[i]->clone() : NULL;
+    }
+    _floorCount = other._floorCount;
   }
   return *this;
 }
 
 Character::~Character() {
-  _clearInventory();
-  std::cout << GREEN << "Character destructed" << RESET << std::endl;
-}
-
-void Character::_clearInventory() {
   for (int i = 0; i < 4; ++i) {
     if (_inventory[i])
       delete _inventory[i];
-    _inventory[i] = NULL;
   }
-}
-
-void Character::_copyInventory(Character const& other) {
-  for (int i = 0; i < 4; ++i) {
-    if (other._inventory[i])
-      _inventory[i] = other._inventory[i]->clone();
-    else
-      _inventory[i] = NULL;
+  for (int i = 0; i < 100; ++i) {
+    if (_floor[i])
+      delete _floor[i];
   }
+  std::cout << GREEN << "Character destructed" << RESET << std::endl;
 }
 
 std::string const& Character::getName() const {
@@ -57,14 +70,27 @@ void Character::equip(AMateria* m) {
   for (int i = 0; i < 4; ++i) {
     if (!_inventory[i]) {
       _inventory[i] = m;
+      std::cout << GREEN << "Equipped " << m->getType() << " to slot " << i
+                << RESET << std::endl;
       break;
     }
   }
 }
 
 void Character::unequip(int idx) {
-  if (idx >= 0 && idx < 4)
+  if (idx < 0 || idx >= 4 || !_inventory[idx]) {
+    std::cout << RED << "Invalid index or no materia to unequip" << RESET
+              << std::endl;
+    return;
+  }
+  if (_floorCount < 100) {
+    _floor[_floorCount++] = _inventory[idx];
     _inventory[idx] = NULL;
+    std::cout << GREEN << "Unequipped materia from slot " << idx
+              << " and placed on the floor" << RESET << std::endl;
+  } else {
+    std::cout << RED << "Floor is full, cannot unequip" << RESET << std::endl;
+  }
 }
 
 void Character::use(int idx, ICharacter& target) {

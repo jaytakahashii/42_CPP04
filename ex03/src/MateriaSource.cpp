@@ -19,49 +19,54 @@ MateriaSource::MateriaSource(MateriaSource const& other) {
 MateriaSource& MateriaSource::operator=(MateriaSource const& other) {
   std::cout << MAGENTA << "MateriaSource copy assigned" << RESET << std::endl;
   if (this != &other) {
-    _clearStorage();
-    _copyStorage(other);
+    for (int i = 0; i < 4; ++i) {
+      if (_storage[i]) {
+        delete _storage[i];
+        _storage[i] = NULL;
+      }
+      if (other._storage[i])
+        _storage[i] = other._storage[i]->clone();
+    }
   }
   return *this;
 }
 
 MateriaSource::~MateriaSource() {
-  _clearStorage();
+  for (int i = 0; i < 4; ++i) {
+    if (_storage[i]) {
+      delete _storage[i];
+    }
+  }
   std::cout << MAGENTA << "MateriaSource destructed" << RESET << std::endl;
 }
 
-void MateriaSource::_clearStorage() {
-  for (int i = 0; i < 4; ++i) {
-    if (_storage[i])
-      delete _storage[i];
-    _storage[i] = NULL;
-  }
-}
-
-void MateriaSource::_copyStorage(MateriaSource const& other) {
-  for (int i = 0; i < 4; ++i) {
-    if (other._storage[i])
-      _storage[i] = other._storage[i]->clone();
-    else
-      _storage[i] = NULL;
-  }
-}
-
 void MateriaSource::learnMateria(AMateria* m) {
-  if (!m)
+  if (!m) {
+    std::cout << RED << "MateriaSource: NULL Materia cannot be learned" << RESET
+              << std::endl;
     return;
+  }
   for (int i = 0; i < 4; ++i) {
     if (!_storage[i]) {
       _storage[i] = m;
-      break;
+      std::cout << MAGENTA << "MateriaSource: Learned " << m->getType()
+                << " Materia" << RESET << std::endl;
+      return;
     }
   }
+  std::cout << RED << "MateriaSource: No space to learn " << m->getType()
+            << " Materia" << RESET << std::endl;
 }
 
 AMateria* MateriaSource::createMateria(std::string const& type) {
   for (int i = 0; i < 4; ++i) {
-    if (_storage[i] && _storage[i]->getType() == type)
+    if (_storage[i] && _storage[i]->getType() == type) {
+      std::cout << MAGENTA << "MateriaSource: Created " << type << " Materia"
+                << RESET << std::endl;
       return _storage[i]->clone();
+    }
   }
+  std::cout << RED << "MateriaSource: Unknown Materia type " << type
+            << " requested" << RESET << std::endl;
   return NULL;
 }

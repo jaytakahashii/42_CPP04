@@ -2,8 +2,9 @@
 
 #include <string>
 
-#include "ICharacter.hpp"
+class ICharacter;
 
+// Abstract Materia class
 class AMateria {
  protected:
   std::string _type;
@@ -17,6 +18,6 @@ class AMateria {
 
   std::string const& getType() const;
 
-  virtual AMateria* clone() const = 0;
+  virtual AMateria* clone() const = 0;  // Pure virtual function
   virtual void use(ICharacter& target);
 };

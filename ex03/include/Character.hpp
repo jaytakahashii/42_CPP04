@@ -7,11 +7,11 @@ class Character : public ICharacter {
  private:
   std::string _name;
   AMateria* _inventory[4];
-
-  void _clearInventory();
-  void _copyInventory(Character const& other);
+  AMateria* _floor[100];
+  int _floorCount;
 
  public:
+  Character();
   Character(std::string const& name);
   Character(Character const& other);
   Character& operator=(Character const& other);

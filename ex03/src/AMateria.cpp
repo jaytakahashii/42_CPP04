@@ -2,7 +2,12 @@
 
 #include <iostream>
 
+#include "ICharacter.hpp"
 #include "color.hpp"
+
+AMateria::AMateria() : _type("default") {
+  std::cout << BLUE << "AMateria default constructed" << RESET << std::endl;
+}
 
 AMateria::AMateria(std::string const& type) : _type(type) {
   std::cout << BLUE << "AMateria constructed" << RESET << std::endl;
