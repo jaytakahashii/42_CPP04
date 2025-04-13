@@ -14,7 +14,6 @@ jobs:
           - "ex01/include"
           - "ex02/src"
           - "ex02/include"
-          - "ex03/src"
           - "ex03/include"
 
     steps:
