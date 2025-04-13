@@ -49,7 +49,7 @@ void MateriaSource::learnMateria(AMateria* m) {
   for (int i = 0; i < 4; ++i) {
     if (!_storage[i]) {
       _storage[i] = m;
-      std::cout << MAGENTA << "MateriaSource: Learned" << m->getType()
+      std::cout << MAGENTA << "MateriaSource: Learned " << m->getType()
                 << " Materia [" << i << "]" << RESET << std::endl;
       return;
     }

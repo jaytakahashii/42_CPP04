@@ -72,9 +72,12 @@ void Character::equip(AMateria* m) {
       _inventory[i] = m;
       std::cout << GREEN << _name << ": Equipped " << m->getType()
                 << " to slot [" << i << "]" << RESET << std::endl;
-      break;
+      return;
     }
   }
+  std::cout << RED << _name << ": No empty slot to equip " << m->getType()
+            << RESET << std::endl;
+  delete m;  // Clean up the materia if not equipped
 }
 
 void Character::unequip(int idx) {
@@ -97,4 +100,7 @@ void Character::unequip(int idx) {
 void Character::use(int idx, ICharacter& target) {
   if (idx >= 0 && idx < 4 && _inventory[idx])
     _inventory[idx]->use(target);
+  else
+    std::cout << RED << _name << ": Invalid index or no materia to use" << RESET
+              << std::endl;
 }
