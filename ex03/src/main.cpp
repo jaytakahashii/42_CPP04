@@ -20,11 +20,8 @@ int main() {
 
   ICharacter* me = new Character("me");
 
-  AMateria* tmp;
-  tmp = src->createMateria("ice");
-  me->equip(tmp);
-  tmp = src->createMateria("cure");
-  me->equip(tmp);
+  me->equip(src->createMateria("ice"));
+  me->equip(src->createMateria("cure"));
 
   ICharacter* bob = new Character("bob");
 
@@ -36,19 +33,20 @@ int main() {
   delete src;
 
   printDivider("Deep Copy Test (Character)");
+  {
+    Character original("original");
+    original.equip(new Ice());
+    original.equip(new Cure());
 
-  Character original("original");
-  original.equip(new Ice());
-  original.equip(new Cure());
+    Character copyConstructed(original);
+    copyConstructed.use(0, original);
+    copyConstructed.use(1, original);
 
-  Character copyConstructed(original);
-  copyConstructed.use(0, original);
-  copyConstructed.use(1, original);
-
-  Character assigned("assigned");
-  assigned = original;
-  assigned.use(0, original);
-  assigned.use(1, original);
+    Character assigned("assigned");
+    assigned = original;
+    assigned.use(0, original);
+    assigned.use(1, original);
+  }
 
   printDivider("Edge Case: Exceeding Materia Slots");
 

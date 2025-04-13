@@ -70,8 +70,8 @@ void Character::equip(AMateria* m) {
   for (int i = 0; i < 4; ++i) {
     if (!_inventory[i]) {
       _inventory[i] = m;
-      std::cout << GREEN << "Equipped " << m->getType() << " to slot " << i
-                << RESET << std::endl;
+      std::cout << GREEN << _name << ": Equipped " << m->getType()
+                << " to slot [" << i << "]" << RESET << std::endl;
       break;
     }
   }
@@ -79,17 +79,18 @@ void Character::equip(AMateria* m) {
 
 void Character::unequip(int idx) {
   if (idx < 0 || idx >= 4 || !_inventory[idx]) {
-    std::cout << RED << "Invalid index or no materia to unequip" << RESET
-              << std::endl;
+    std::cout << RED << _name << ": Invalid index or no materia to unequip"
+              << RESET << std::endl;
     return;
   }
   if (_floorCount < 100) {
     _floor[_floorCount++] = _inventory[idx];
     _inventory[idx] = NULL;
-    std::cout << GREEN << "Unequipped materia from slot " << idx
+    std::cout << GREEN << _name << ": Unequipped materia from slot " << idx
               << " and placed on the floor" << RESET << std::endl;
   } else {
-    std::cout << RED << "Floor is full, cannot unequip" << RESET << std::endl;
+    std::cout << RED << _name << ": Floor is full, cannot unequip" << RESET
+              << std::endl;
   }
 }
 

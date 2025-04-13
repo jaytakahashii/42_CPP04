@@ -49,20 +49,22 @@ void MateriaSource::learnMateria(AMateria* m) {
   for (int i = 0; i < 4; ++i) {
     if (!_storage[i]) {
       _storage[i] = m;
-      std::cout << MAGENTA << "MateriaSource: Learned " << m->getType()
-                << " Materia" << RESET << std::endl;
+      std::cout << MAGENTA << "MateriaSource: Learned" << m->getType()
+                << " Materia [" << i << "]" << RESET << std::endl;
       return;
     }
   }
   std::cout << RED << "MateriaSource: No space to learn " << m->getType()
             << " Materia" << RESET << std::endl;
+  delete m;  // Clean up the materia if not stored
 }
 
 AMateria* MateriaSource::createMateria(std::string const& type) {
   for (int i = 0; i < 4; ++i) {
     if (_storage[i] && _storage[i]->getType() == type) {
-      std::cout << MAGENTA << "MateriaSource: Created " << type << " Materia"
-                << RESET << std::endl;
+      std::cout << MAGENTA << "MateriaSource: Created "
+                << _storage[i]->getType() << " Materia [" << i << "]" << RESET
+                << std::endl;
       return _storage[i]->clone();
     }
   }
